@@ -5,6 +5,10 @@
 
 def rotate_2d_matrix(matrix: list) -> list:
     """Rotate n x n matrix in place
+        ARGS:
+        -   matrix: a list of list containing integers
+        RETURN
+        -   a rotated list of list
     """
     if type(matrix) != list:
         return
