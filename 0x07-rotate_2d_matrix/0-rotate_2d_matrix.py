@@ -2,8 +2,10 @@
 """ 2D Matrix Rotation by 90 degrees
 """
 
+from typing import List
 
-def rotate_2d_matrix(matrix):
+
+def rotate_2d_matrix(matrix: List) -> List:
     """Rotate n x n matrix in place
     """
     if type(matrix) != list:
