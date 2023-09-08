@@ -30,6 +30,9 @@ def isWinner(x, nums):
     If the winner cannot be determined, return None
     You can assume n and x will not be larger than 10000
     """
+    if x >= 10000 or max(nums) >= 10000:
+        return None
+
     score = {"Maria": 0, "Ben": 0}
     primes = [0, 0, 2]
     add_prime_number(max(nums), primes)
