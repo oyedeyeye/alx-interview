@@ -5,6 +5,7 @@ Prime Number Game
 
 
 def is_prime(n):
+    """ check if n is a prime number """
     if n <= 1:
         return False
     for i in range(2, int(n**0.5) + 1):
@@ -14,6 +15,7 @@ def is_prime(n):
 
 
 def next_prime(start, numbers):
+    """checks next primes in the list"""
     for num in range(start + 1, len(numbers)):
         if numbers[num] and is_prime(num):
             return num
@@ -21,6 +23,12 @@ def next_prime(start, numbers):
 
 
 def isWinner(x, nums):
+    """
+    where x is the number of rounds and nums is an array of n
+    Return: name of the player that won the most rounds
+    If the winner cannot be determined, return None
+    You can assume n and x will not be larger than 10000
+    """
     if x <= 0 or len(nums) != x:
         return None
 
