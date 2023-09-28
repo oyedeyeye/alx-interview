@@ -4,41 +4,40 @@ Prime Number Game
 """
 
 
-def check_prime_number(n):
-    """ check if n is a prime number """
+def is_prime(n):
     if n <= 1:
         return False
     for i in range(2, int(n**0.5) + 1):
         if n % i == 0:
             return False
-        return True
+    return True
 
 
-def next_prime_number(start, numbers):
-    """checks next primes in the list"""
+def next_prime(start, numbers):
     for num in range(start + 1, len(numbers)):
-        if numbers[num] and check_prime_number(num):
+        if numbers[num] and is_prime(num):
             return num
     return None
 
 
 def isWinner(x, nums):
-    """
-    where x is the number of rounds and nums is an array of n
-    Return: name of the player that won the most rounds
-    If the winner cannot be determined, return None
-    You can assume n and x will not be larger than 10000
-    """
+    if x <= 0 or len(nums) != x:
+        return None
+
     maria_wins = 0
     ben_wins = 0
 
     for n in nums:
+        if n <= 0:
+            # Skip this round if n is not positive
+            continue
+
         numbers = [True] * (n + 1)
         numbers[0] = numbers[1] = False
         turn_maria = True
 
         while True:
-            prime = next_prime_number(1, numbers)
+            prime = next_prime(1, numbers)
             if prime is None:
                 break
 
@@ -46,11 +45,14 @@ def isWinner(x, nums):
                 numbers[multiple] = False
 
             if turn_maria:
-                maria_wins += 1
+                turn_maria = False
             else:
-                ben_wins += 1
+                turn_maria = True
 
-            turn_maria = not turn_maria
+        if not turn_maria:
+            maria_wins += 1
+        else:
+            ben_wins += 1
 
     if maria_wins > ben_wins:
         return "Maria"
@@ -58,3 +60,12 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
+
+
+# Test with provided edge cases
+print(isWinner(5, [2, 5, 1, 4, 3]))  # Output: Ben
+print(isWinner(-1, [10]))  # Output: None
+print(isWinner(0, [0]))  # Output: None
+print(isWinner(6, [1, 1, 0, 0, 1, 8]))  # Output: Ben
+print(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2]))  # Output: Maria
+print(isWinner(5, [1, 2, 3, 4, 5]))  # Output: Maria
