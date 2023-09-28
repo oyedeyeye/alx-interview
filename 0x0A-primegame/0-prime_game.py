@@ -60,12 +60,3 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
-
-
-# Test with provided edge cases
-print(isWinner(5, [2, 5, 1, 4, 3]))  # Output: Ben
-print(isWinner(-1, [10]))  # Output: None
-print(isWinner(0, [0]))  # Output: None
-print(isWinner(6, [1, 1, 0, 0, 1, 8]))  # Output: Ben
-print(isWinner(10, [5, 5, 5, 5, 5, 2, 2, 2, 2, 2]))  # Output: Maria
-print(isWinner(5, [1, 2, 3, 4, 5]))  # Output: Maria
