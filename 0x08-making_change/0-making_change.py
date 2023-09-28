@@ -2,26 +2,21 @@
 """
 makeChange(coins, total): determine the fewest number of coins
     needed to meet a given amount total
+    achieving 0(n) through Bottom-Up approach
 """
-
-
-import sys
 
 
 def makeChange(coins, total):
     """ Return: fewest number of coins needed to meet total """
-    if total == 0:
+    if total <= 0:
         return 0
 
-    length = len(coins)
+    temp = 0
+    coins.sort(reverse=True)
 
-    # initialize the result to max value the variable can hold
-    result = sys.maxsize
+    for coin in coins:
+        if total % coin <= total:
+            temp += total // coin
+            total = total % coin
 
-    for i in range(0, length):
-        if (coins[i] <= total):
-            sub_result = makeChange(coins, total - coins[i])
-            if (sub_result != sys.maxsize and sub_result + 1 < result):
-                result = sub_result + 1
-
-    return result
+    return temp if total == 0 else -1
